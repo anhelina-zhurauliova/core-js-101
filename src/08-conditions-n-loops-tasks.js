@@ -419,10 +419,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = [];
+  if (m1[0].length !== m2.length) return false;
+  for (let i = 0; i < m1.length; i += 1) result[i] = [];
+  for (let k = 0; k < m2[0].length; k += 1) {
+    for (let i = 0; i < m1.length; i += 1) {
+      let mult = 0;
+      for (let j = 0; j < m2.length; j += 1) mult += m1[i][j] * m2[j][k];
+      result[i][k] = mult;
+    }
+  }
+  return result;
 }
-
 
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
@@ -455,7 +464,6 @@ function getMatrixProduct(/* m1, m2 */) {
  *
  */
 function evaluateTicTacToePosition(position) {
-  // eslint-disable-next-line consistent-return
   const whoIsAWinner = (player) => {
     for (let i = 0; i < 3; i += 1) {
       if (position[i][0] === position[i][1]

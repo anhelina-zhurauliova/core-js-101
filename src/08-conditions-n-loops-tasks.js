@@ -454,8 +454,40 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  // eslint-disable-next-line consistent-return
+  const whoIsAWinner = (player) => {
+    for (let i = 0; i < 3; i += 1) {
+      if (position[i][0] === position[i][1]
+        && position[i][0] === position[i][2]
+        && position[i][0] === player) {
+        return true;
+      }
+      if (position[0][i] === position[1][i]
+        && position[0][i] === position[2][i]
+        && position[0][i] === player) {
+        return true;
+      }
+    }
+    if (position[0][0] === position[1][1]
+      && position[2][2] === position[0][0]
+      && position[0][0] === player) {
+      return true;
+    }
+    if (position[0][2] === position[1][1]
+      && position[2][0] === position[0][2]
+      && position[2][0] === player) {
+      return true;
+    }
+    return false;
+  };
+  if (whoIsAWinner('X')) {
+    return 'X';
+  }
+  if (whoIsAWinner('0')) {
+    return '0';
+  }
+  return undefined;
 }
 
 
